@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfc.Deudak.Modelos.UserModel;
 import com.tfc.Deudak.Repositorios.UserRepository;
@@ -20,6 +21,24 @@ public class Controller {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	// LOGIN
+	@GetMapping("")
+	public String login() {
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String login(@RequestParam String email, @RequestParam String password, Model model) {
+		UserModel user = userRepository.findByEmail(email);
+		if (user != null /* && password matches, si tienes password */) {
+			// Lógica de login, session, etc.
+			return "redirect:/dashboard"; // Página principal después de login
+		} else {
+			model.addAttribute("error", "Usuario o contraseña incorrectos");
+			return "login_register";
+		}
+	}
 
 	// ACCEDER AL INDEX
 	@GetMapping("/")
