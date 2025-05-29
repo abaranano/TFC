@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Getter
 @Setter
@@ -19,17 +20,21 @@ import lombok.Setter;
 @Table(name = "Deuda")
 public class DeudaModel {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
-	
-	@Column
-	private double quantity;
-	
-	@Column
-	private String description;	
-	
-	@ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserModel user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false)
+    private double quantity;
+
+    @Column(nullable = false)
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "deudor_id", nullable = false)
+    private UserModel deudor;
+
+    @ManyToOne
+    @JoinColumn(name = "acreedor_id", nullable = false)
+    private UserModel acreedor;
 }

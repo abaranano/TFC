@@ -28,8 +28,22 @@ public class Controller {
 	}
 
 	@PostMapping("/save")
-	public String guardarDeuda(@ModelAttribute DeudaModel deuda) {
-		deudaRepository.save(deuda);
-		return "redirect:/deudas/lista";
-	}
+    public String guardarDeuda(@RequestParam long deudorId, @RequestParam long acreedorId,
+                               @ModelAttribute DeudaModel deuda) {
+        UserModel deudor = userRepository.findById(deudorId).orElseThrow();
+        UserModel acreedor = userRepository.findById(acreedorId).orElseThrow();
+
+        deuda.setDeudor(deudor);
+        deuda.setAcreedor(acreedor);
+
+        deudaRepository.save(deuda);
+        return "redirect:/deudas/lista";
+    }
+
+	
+    @GetMapping("/lista")
+    public String listarDeudas(Model model) {
+        model.addAttribute("deudas", deudaRepository.findAll());
+        return "deuda_lista";
+    }
 }

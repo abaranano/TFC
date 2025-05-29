@@ -1,18 +1,12 @@
 package com.tfc.Deudak.Modelos;
 
-import java.util.ArrayList;
-import java.util.List;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,16 +15,19 @@ import lombok.Setter;
 @Table(name = "User")
 public class UserModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	@Column
-	private String name;
+    @Column(nullable = false)
+    private String name;
 
-	@Column
-	private String phone;
+    @Column
+    private String phone;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<DeudaModel> deudas = new ArrayList<>();
+    @OneToMany(mappedBy = "deudor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeudaModel> deudasComoDeudor = new ArrayList<>();
+
+    @OneToMany(mappedBy = "acreedor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeudaModel> deudasComoAcreedor = new ArrayList<>();
 }
