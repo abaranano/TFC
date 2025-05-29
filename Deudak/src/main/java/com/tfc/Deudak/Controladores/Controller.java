@@ -12,15 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tfc.Deudak.Modelos.UserModel;
-import com.tfc.Deudak.Repositorios.DeudaRepository;
 import com.tfc.Deudak.Repositorios.UserRepository;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/usuarios")
 public class Controller {
-
-	@Autowired
-	private DeudaRepository deudaRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -31,7 +27,7 @@ public class Controller {
 		return "index";
 	}
 
-	// Metodos para Listar o ver Usuarios
+	// LISTAR Y VER USUARIOS
 	@GetMapping("/userList")
 	public String listarUsuarios(Model model) {
 		List<UserModel> usuarios = userRepository.findAll();
@@ -50,7 +46,7 @@ public class Controller {
 		}
 	}
 
-	// Metodos para crear usuarios
+	// CREAR USUARIOS
 	@GetMapping("/crear")
 	public String mostrarFormularioCreacion(Model model) {
 		model.addAttribute("usuario", new UserModel());
@@ -63,7 +59,7 @@ public class Controller {
 		return "redirect:/usuarios/";
 	}
 
-	// Metodos para eleminar usuarios
+	// ELIMINAR USUARIOS
 	@GetMapping("/eliminar/{id}")
 	public String eliminarUsuario(@PathVariable Long id) {
 		userRepository.deleteById(id);

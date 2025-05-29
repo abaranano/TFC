@@ -26,6 +26,11 @@
             <span th:text="${deuda.quantity}">0</span> € 
             <span th:if="${deuda.paid}" style="color:green">[Pagada]</span>
             <span th:if="${!deuda.paid}" style="color:red">[No pagada]</span>
+			<span th:if="${!deuda.paid}">
+				<form th:action="@{'/deudas/pagada/' + ${deuda.id}}" method="post" style="display:inline">
+				    <button type="submit">Marcar como pagada</button>
+				</form>
+			 </span>
 			<a th:href="@{'/deudas/eliminar/' + ${deuda.id}}" onclick="return confirm('¿Estás seguro de eliminar esta deuda?')">[Perdonar deuda]</a>
         </li>
     </ul>

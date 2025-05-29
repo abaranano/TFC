@@ -30,6 +30,7 @@ public class DeudaController {
 		return "index";
 	}
 
+	// CREAR DEUDAS
 	@GetMapping("/deudaNueva")
 	public String mostrarFormularioDeuda(Model model) {
 		model.addAttribute("deuda", new DeudaModel());
@@ -51,10 +52,23 @@ public class DeudaController {
 		return "redirect:/usuarios/userList";
 	}
 
+	// DAR DEUDA COMO PAGADA
+	@PostMapping("/pagada/{id}")
+	public String deudaPagada(@PathVariable("id") Long id) {
+		DeudaModel deuda = deudaRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("ID de deuda inválido: " + id));
+
+		deuda.setPaid(true);
+		deudaRepository.save(deuda);
+
+		return "redirect:/usuarios/userList";
+	}
+
+	// ELIMINAR DEUDAS
 	@GetMapping("/eliminar/{id}")
 	public String eliminarDeuda(@PathVariable("id") Long id) {
-	    deudaRepository.deleteById(id);
-	    return "redirect:/usuarios/userList"; // Ajusta la redirección según tu flujo
+		deudaRepository.deleteById(id);
+		return "redirect:/usuarios/userList";
 	}
 
 }

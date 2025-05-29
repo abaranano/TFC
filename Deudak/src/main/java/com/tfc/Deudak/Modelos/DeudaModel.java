@@ -89,8 +89,5 @@ public class DeudaModel {
 	@ManyToOne
 	@JoinColumn(name = "acreedor_id", nullable = false)
 	private UserModel acreedor;
-
-	
-	
 	
 }
