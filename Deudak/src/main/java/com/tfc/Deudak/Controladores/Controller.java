@@ -22,22 +22,36 @@ public class Controller {
 	@Autowired
 	private UserRepository userRepository;
 
-	// LOGIN
-	@GetMapping("")
-	public String login() {
-		return "login";
+	// Mostrar formulario de login
+	@GetMapping("/login")
+	public String showLoginForm(Model model) {
+		model.addAttribute("user", new UserModel());
+		return "login"; // login.html
 	}
 
+	// Procesar login
 	@PostMapping("/login")
-	public String login(@RequestParam String email, @RequestParam String password, Model model) {
-		UserModel user = userRepository.findByEmail(email);
-		if (user != null /* && password matches, si tienes password */) {
-			// Lógica de login, session, etc.
-			return "redirect:/dashboard"; // Página principal después de login
-		} else {
-			model.addAttribute("error", "Usuario o contraseña incorrectos");
-			return "login_register";
-		}
+	public String processLogin(@ModelAttribute("user") UserModel user) {
+		// Aquí validarías email/phone contra la base de datos
+		System.out.println("Email: " + user.getEmail() + ", Tel: " + user.getPhone());
+
+		// Simulación de validación exitosa
+		return "redirect:/"; // o a donde quieras redirigir
+	}
+
+	// Mostrar formulario de registro
+	@GetMapping("/register")
+	public String showRegisterForm(Model model) {
+		model.addAttribute("user", new UserModel());
+		return "register"; // register.html
+	}
+
+	// Procesar registro
+	@PostMapping("/register")
+	public String processRegister(@ModelAttribute("user") UserModel user) {
+		// Guardar usuario en la base de datos
+		System.out.println("Registro: " + user.getEmail());
+		return "redirect:/login";
 	}
 
 	// ACCEDER AL INDEX
