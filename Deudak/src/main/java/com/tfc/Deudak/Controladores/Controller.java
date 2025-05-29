@@ -46,4 +46,18 @@ public class Controller {
         model.addAttribute("deudas", deudaRepository.findAll());
         return "deuda_lista";
     }
+
+	@GetMapping("/editar/{id}")
+    public String editarDeuda(@PathVariable("id") long id, Model model) {
+        DeudaModel deuda = deudaRepository.findById(id).orElseThrow();
+        model.addAttribute("deuda", deuda);
+        model.addAttribute("usuarios", userRepository.findAll());
+        return "deuda_form";
+    }
+
+	@GetMapping("/eliminar/{id}")
+    public String eliminarDeuda(@PathVariable("id") long id) {
+        deudaRepository.deleteById(id);
+        return "redirect:/deudas/lista";
+    }
 }
