@@ -14,19 +14,6 @@ import java.util.List;
 @Table(name = "user")
 public class UserModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Column(nullable = false, unique = false, length = 50)
-	private String name;
-
-	@Column(nullable = false, unique = false, length = 50)
-	private String lastName;
-
-	@Column(nullable = false, unique = true, length = 100)
-	private String email;
-
 	public Long getId() {
 		return id;
 	}
@@ -82,6 +69,19 @@ public class UserModel {
 	public void setDeudasPorCobrar(List<DeudaModel> deudasPorCobrar) {
 		this.deudasPorCobrar = deudasPorCobrar;
 	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(nullable = false, unique = false, length = 50)
+	private String name;
+
+	@Column(nullable = false, unique = false, length = 50)
+	private String lastName;
+
+	@Column(nullable = false, unique = true, length = 100)
+	private String email;
 
 	@Column(nullable = true, unique = true, length = 9)
 	private String phone;

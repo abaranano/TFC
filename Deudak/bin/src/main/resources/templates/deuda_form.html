@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrar Deuda</title>
+</head>
+<body>
+
+<h2>Registrar Nueva Deuda</h2>
+
+<form th:action="@{/deudas/save}" th:object="${deuda}" method="post">
+
+    <label for="quantity">Cantidad:</label>
+    <input type="number" step="0.01" th:field="*{quantity}" required/><br/><br/>
+
+    <label for="description">Descripción:</label>
+    <input type="text" th:field="*{description}" required/><br/><br/>
+
+    <label for="deudorId">Deudor:</label>
+    <select name="deudorId" required>
+        <option th:each="user : ${usuarios}" th:value="${user.id}" th:text="${user.name}"></option>
+    </select><br/><br/>
+
+    <label for="acreedorId">Acreedor:</label>
+    <select name="acreedorId" required>
+        <option th:each="user : ${usuarios}" th:value="${user.id}" th:text="${user.name}"></option>
+    </select><br/><br/>
+
+    <button type="submit">Guardar Deuda</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio - Deudak</title>
+</head>
+<body>
+    <h1>Bienvenido a Deudak</h1>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/usuarios/userList}">Ver lista de usuarios</a></li>
+            <li><a th:href="@{/usuarios/crear}">Crear un nuevo usuario</a></li>
+			<li><a th:href="@{/deudas/nuevo}">Añadir nueva deuda</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

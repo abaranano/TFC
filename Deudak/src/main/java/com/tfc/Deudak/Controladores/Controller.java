@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tfc.Deudak.Modelos.DeudaModel;
 import com.tfc.Deudak.Modelos.UserModel;
 import com.tfc.Deudak.Repositorios.DeudaRepository;
 import com.tfc.Deudak.Repositorios.UserRepository;
@@ -24,13 +26,13 @@ public class Controller {
 
 	@Autowired
 	private UserRepository userRepository;
+
 	// ACCEDER AL INDEX
 	@GetMapping("/")
 	public String index() {
-	    return "index";
+		return "index";
 	}
 
-	
 	// Metodos para Listar o ver Usuarios
 	@GetMapping("/userList")
 	public String listarUsuarios(Model model) {
@@ -63,30 +65,33 @@ public class Controller {
 		return "redirect:/usuarios/";
 	}
 
+	// Metodos para eleminar usuarios
 	@GetMapping("/eliminar/{id}")
 	public String eliminarUsuario(@PathVariable Long id) {
 		userRepository.deleteById(id);
 		return "redirect:/usuarios/";
 	}
 
-	/*
-	 * @GetMapping("/nuevo") public String mostrarFormulario(Model model) {
-	 * model.addAttribute("deuda", new DeudaModel()); model.addAttribute("usuarios",
-	 * userRepository.findAll()); return "deuda_form.html"; }
-	 * 
-	 * @PostMapping("/save") public String guardarDeuda(@RequestParam long
-	 * deudorId, @RequestParam long acreedorId,
-	 * 
-	 * @ModelAttribute DeudaModel deuda) { // UserModel deudor =
-	 * userRepository.findById(deudorId).orElseThrow(); // UserModel acreedor =
-	 * userRepository.findById(acreedorId).orElseThrow();
-	 * 
-	 * // deuda.setDeudor(deudor); // deuda.setAcreedor(acreedor);
-	 * 
-	 * deudaRepository.save(deuda); return "redirect:/deudas/lista"; }
-	 * 
-	 * @GetMapping("/lista") public String listarDeudas(Model model) {
-	 * model.addAttribute("deudas", deudaRepository.findAll()); return
-	 * "deuda_lista"; }
-	 */
+	@GetMapping("/nuevo")
+	public String mostrarFormularioDeuda(Model model) {
+	    model.addAttribute("deuda", new DeudaModel());
+	    model.addAttribute("usuarios", userRepository.findAll());
+	    return "deuda_form";
+	}
+
+	@PostMapping("/save")
+	public String guardarDeuda(@RequestParam long deudorId,
+	                           @RequestParam long acreedorId,
+	                           @ModelAttribute DeudaModel deuda) {
+
+	    UserModel deudor = userRepository.findById(deudorId).orElseThrow();
+	    UserModel acreedor = userRepository.findById(acreedorId).orElseThrow();
+
+	    deuda.setDeudor(deudor);
+	    deuda.setAcreedor(acreedor);
+
+	    deudaRepository.save(deuda);
+	    return "redirect:/usuarios/userList";
+	}
+
 }

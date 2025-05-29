@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nueva Deuda</title>
+</head>
+<body>
+    <h1>Registrar Nueva Deuda</h1>
+
+    <form th:action="@{/usuarios/save}" method="post" th:object="${deuda}">
+        <label>Descripción:</label>
+        <input type="text" th:field="*{description}" required /><br/>
+
+        <label>Cantidad:</label>
+        <input type="number" step="0.01" th:field="*{quantity}" required /><br/>
+
+        <label>¿Pagada?</label>
+        <input type="checkbox" th:field="*{paid}" /><br/>
+
+        <label>Deudor:</label>
+        <select name="deudorId" required>
+            <option th:each="usuario : ${usuarios}" 
+                    th:value="${usuario.id}" 
+                    th:text="${usuario.name + ' ' + usuario.lastName}">
+            </option>
+        </select><br/>
+
+        <label>Acreedor:</label>
+        <select name="acreedorId" required>
+            <option th:each="usuario : ${usuarios}" 
+                    th:value="${usuario.id}" 
+                    th:text="${usuario.name + ' ' + usuario.lastName}">
+            </option>
+        </select><br/>
+
+        <button type="submit">Guardar Deuda</button>
+    </form>
+
+    <a th:href="@{/usuarios/userList}">Volver a lista de usuarios</a>
+</body>
+</html>

@@ -32,6 +32,54 @@ public class DeudaModel {
 	@Column(nullable = false)
 	private boolean paid;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
+	}
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
+
+	public UserModel getDeudor() {
+		return deudor;
+	}
+
+	public void setDeudor(UserModel deudor) {
+		this.deudor = deudor;
+	}
+
+	public UserModel getAcreedor() {
+		return acreedor;
+	}
+
+	public void setAcreedor(UserModel acreedor) {
+		this.acreedor = acreedor;
+	}
+
 	// Usuario que debe el dinero
 	@ManyToOne
 	@JoinColumn(name = "deudor_id", nullable = false)
@@ -41,4 +89,8 @@ public class DeudaModel {
 	@ManyToOne
 	@JoinColumn(name = "acreedor_id", nullable = false)
 	private UserModel acreedor;
+
+	
+	
+	
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Deudas</title>
+</head>
+<body>
+
+<h2>Lista de Deudas</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Cantidad</th>
+        <th>Descripción</th>
+        <th>Deudor</th>
+        <th>Acreedor</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="deuda : ${deudas}">
+        <td th:text="${deuda.id}"></td>
+        <td th:text="${deuda.quantity}"></td>
+        <td th:text="${deuda.description}"></td>
+        <td th:text="${deuda.deudor.name}"></td>
+        <td th:text="${deuda.acreedor.name}"></td>
+        <td>
+            <a th:href="@{'/deudas/editar/' + ${deuda.id}}">Editar</a> |
+            <a th:href="@{'/deudas/eliminar/' + ${deuda.id}}"
+               onclick="return confirm('¿Estás seguro de que quieres eliminar esta deuda?');">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
+<a href="/deudas/nuevo">Registrar Nueva Deuda</a>
+
+</body>
+</html>
