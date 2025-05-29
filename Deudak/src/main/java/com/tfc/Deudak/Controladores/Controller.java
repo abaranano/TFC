@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tfc.Deudak.Modelos.DeudaModel;
 import com.tfc.Deudak.Modelos.UserModel;
 import com.tfc.Deudak.Repositorios.DeudaRepository;
 import com.tfc.Deudak.Repositorios.UserRepository;
@@ -70,28 +68,6 @@ public class Controller {
 	public String eliminarUsuario(@PathVariable Long id) {
 		userRepository.deleteById(id);
 		return "redirect:/usuarios/";
-	}
-
-	@GetMapping("/nuevo")
-	public String mostrarFormularioDeuda(Model model) {
-	    model.addAttribute("deuda", new DeudaModel());
-	    model.addAttribute("usuarios", userRepository.findAll());
-	    return "deuda_form";
-	}
-
-	@PostMapping("/save")
-	public String guardarDeuda(@RequestParam long deudorId,
-	                           @RequestParam long acreedorId,
-	                           @ModelAttribute DeudaModel deuda) {
-
-	    UserModel deudor = userRepository.findById(deudorId).orElseThrow();
-	    UserModel acreedor = userRepository.findById(acreedorId).orElseThrow();
-
-	    deuda.setDeudor(deudor);
-	    deuda.setAcreedor(acreedor);
-
-	    deudaRepository.save(deuda);
-	    return "redirect:/usuarios/userList";
 	}
 
 }

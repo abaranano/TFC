@@ -6,7 +6,7 @@
 <body>
     <h1>Registrar Nueva Deuda</h1>
 
-    <form th:action="@{/usuarios/save}" method="post" th:object="${deuda}">
+    <form th:action="@{/deudas/save}" method="post" th:object="${deuda}">
         <label>Descripción:</label>
         <input type="text" th:field="*{description}" required /><br/>
 
