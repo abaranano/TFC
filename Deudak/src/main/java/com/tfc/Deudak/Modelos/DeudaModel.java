@@ -12,29 +12,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "Deuda")
+@Table(name = "deuda")
 public class DeudaModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable = false)
-    private double quantity;
+	@Column(nullable = false, length = 100)
+	private String description;
 
-    @Column(nullable = false)
-    private String description;
+	@Column(nullable = false)
+	private double quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "deudor_id", nullable = false)
-    private UserModel deudor;
+	@Column(nullable = false)
+	private boolean paid;
 
-    @ManyToOne
-    @JoinColumn(name = "acreedor_id", nullable = false)
-    private UserModel acreedor;
+	// Usuario que debe el dinero
+	@ManyToOne
+	@JoinColumn(name = "deudor_id", nullable = false)
+	private UserModel deudor;
+
+	// Usuario al que se le debe el dinero
+	@ManyToOne
+	@JoinColumn(name = "acreedor_id", nullable = false)
+	private UserModel acreedor;
 }
