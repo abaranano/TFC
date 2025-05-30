@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfc.Deudak.Modelos.UserModel;
 import com.tfc.Deudak.Repositorios.UserRepository;
@@ -26,30 +25,27 @@ public class Controller {
 	@GetMapping("/login")
 	public String showLoginForm(Model model) {
 		model.addAttribute("user", new UserModel());
-		return "login"; // login.html
+		return "login";
 	}
 
 	// Procesar login
 	@PostMapping("/login")
 	public String processLogin(@ModelAttribute("user") UserModel user) {
-		// Aquí validarías email/phone contra la base de datos
 		System.out.println("Email: " + user.getEmail() + ", Tel: " + user.getPhone());
 
-		// Simulación de validación exitosa
-		return "redirect:/"; // o a donde quieras redirigir
+		return "redirect:/";
 	}
 
 	// Mostrar formulario de registro
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new UserModel());
-		return "register"; // register.html
+		return "register";
 	}
 
 	// Procesar registro
 	@PostMapping("/register")
 	public String processRegister(@ModelAttribute("user") UserModel user) {
-		// Guardar usuario en la base de datos
 		System.out.println("Registro: " + user.getEmail());
 		return "redirect:/login";
 	}

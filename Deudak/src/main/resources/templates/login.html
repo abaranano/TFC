@@ -5,7 +5,7 @@
 </head>
 <body>
 <h2>Iniciar sesión</h2>
-<form th:action="@{/login}" th:object="${user}" method="post">
+<form th:action="@{usuarios/login}" th:object="${user}" method="post">
     <label for="email">Email:</label>
     <input type="email" id="email" th:field="*{email}" required/>
     <br/>
@@ -14,7 +14,7 @@
     <br/>
     <button type="submit">Iniciar sesión</button>
 </form>
-<p>No tienes cuenta? <a th:href="@{/register}">Regístrate aquí</a></p>
+<p>No tienes cuenta? <a th:href="@{usuarios/register}">Regístrate aquí</a></p>
 </body>
 </html>
 
