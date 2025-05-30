@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Detalle del Usuario</title>
+    <title>Erabiltzailea</title>
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+	<a th:href="@{/usuarios/}">Hasierara</a>
     <h1 th:text="${usuario.name + ' ' + usuario.lastName}">Nombre Completo</h1>
 
     <p><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
-    <p><strong>Teléfono:</strong> <span th:text="${usuario.phone}"></span></p>
+    <p><strong>Telefonoa:</strong> <span th:text="${usuario.phone}"></span></p>
 
-    <h2>Deudas Pendientes</h2>
+    <h2>Ordaindu beharrekoak</h2>
     <ul>
         <li th:each="deuda : ${usuario.deudasPendientes}">
             <span th:text="${deuda.description}"></span> - 
             <span th:text="${deuda.quantity}">0</span> € 
-            <span th:if="${deuda.paid}" style="color:green">[Pagada]</span>
-            <span th:if="${!deuda.paid}" style="color:red">[No pagada]</span>
+            <span th:if="${deuda.paid}" style="color:green">[Ordainduta]</span>
+            <span th:if="${!deuda.paid}" style="color:red">[Ordaindu gabekoa]</span>
         </li>
     </ul>
 
-    <h2>Deudas por Cobrar</h2>
+    <h2>Jaso beharrekoak</h2>
     <ul>
         <li th:each="deuda : ${usuario.deudasPorCobrar}">
             <span th:text="${deuda.description}"></span> - 
             <span th:text="${deuda.quantity}">0</span> € 
-            <span th:if="${deuda.paid}" style="color:green">[Pagada]</span>
-            <span th:if="${!deuda.paid}" style="color:red">[No pagada]</span>
+            <span th:if="${deuda.paid}" style="color:green">[Ordainduta]</span>
+            <span th:if="${!deuda.paid}" style="color:red">[Ordaindu gabekoa]</span>
 			<span th:if="${!deuda.paid}">
-				<form th:action="@{'/deudas/pagada/' + ${deuda.id}}" method="post" style="display:inline">
-				    <button type="submit">Marcar como pagada</button>
+				<form class="form-unstyled" th:action="@{'/deudas/pagada/' + ${deuda.id}}" method="post" style="display:inline">
+				    <button type="submit">Ordainduta</button>
 				</form>
 			 </span>
-			<a th:href="@{'/deudas/eliminar/' + ${deuda.id}}" onclick="return confirm('¿Estás seguro de eliminar esta deuda?')">[Perdonar deuda]</a>
+			 <span th:if="${!deuda.paid}">
+			 	<form class="form-unstyled" th:action="@{'/deudas/eliminar/' + ${deuda.id}}" style="display:inline">
+			 		<button type="submit">Barkatu deuda</button>
+			 	</form>
+			 </span>
         </li>
     </ul>
-
-    <a th:href="@{/usuarios/userList}">Volver a la lista</a>
+    <a th:href="@{/usuarios/userList}">Bueltatu zerrendara</a>
 </body>
 </html>

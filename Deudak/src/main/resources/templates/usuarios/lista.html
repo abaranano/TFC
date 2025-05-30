@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Usuarios</title>
+    <title>Erabiltzaile zerrenda</title>
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>Lista de Usuarios</h1>
+	<a th:href="@{/usuarios/}">Hasierara</a>
+    <h1>Erabiltzaile zerrenda</h1>
 
-    <a th:href="@{/usuarios/crear}">Crear nuevo usuario</a>
-	<a th:href="@{/deudas/deudaNueva}">Añadir nueva deuda</a>
+	<form class="form-unstyled" th:action="@{/usuarios/crear}" style="display:inline">
+		<button type="submit">Sortu erabiltzaile berria</button>
+	</form>
+	
+	<form class="form-unstyled" th:action="@{/deudas/deudaNueva}" style="display:inline">
+		<button type="submit">Sortu zor berria</button>
+	</form>
 
     <table border="1">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Acciones</th>
+                <th>Izena</th>
+                <th>Abizena</th>
+                <th>Email-a</th>
+                <th>Telefonoa</th>
+                <th>Ariketak</th>
             </tr>
         </thead>
         <tbody>
@@ -26,10 +33,10 @@
                 <td th:text="${usuario.email}">Email</td>
                 <td th:text="${usuario.phone}">Teléfono</td>
                 <td>
-                    <a th:href="@{'/usuarios/user/' + ${usuario.id}}">Ver</a> |
+                    <a th:href="@{'/usuarios/user/' + ${usuario.id}}">Ikusi gehiago</a> |
                     <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" 
                        onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                       Eliminar
+                       Ezabatu
                     </a>
 
                 </td>

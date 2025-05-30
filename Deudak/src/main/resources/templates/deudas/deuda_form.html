@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Nueva Deuda</title>
+    <title>Zor berria</title>
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>Registrar Nueva Deuda</h1>
+	<a th:href="@{/usuarios/}">Hasierara</a>
+    <h1>Erregistratu zor berria</h1>
 
     <form th:action="@{/deudas/save}" method="post" th:object="${deuda}">
-        <label>Descripción:</label>
+        <label>Deskribapena:</label>
         <input type="text" th:field="*{description}" required /><br/>
 
-        <label>Cantidad:</label>
+        <label>Zenbatekoa:</label>
         <input type="number" step="0.01" th:field="*{quantity}" required /><br/>
 
-        <label>¿Pagada?</label>
+        <label>¿Ordainduta?</label>
         <input type="checkbox" th:field="*{paid}" /><br/>
 
-        <label>Deudor:</label>
+        <label>Zordun:</label>
         <select name="deudorId" required>
             <option th:each="usuario : ${usuarios}" 
                     th:value="${usuario.id}" 
@@ -24,7 +26,7 @@
             </option>
         </select><br/>
 
-        <label>Acreedor:</label>
+        <label>Artzekodun:</label>
         <select name="acreedorId" required>
             <option th:each="usuario : ${usuarios}" 
                     th:value="${usuario.id}" 
@@ -32,9 +34,9 @@
             </option>
         </select><br/>
 
-        <button type="submit">Guardar Deuda</button>
+        <button type="submit">Gorde</button>
     </form>
 
-    <a th:href="@{/usuarios/userList}">Volver a lista de usuarios</a>
+    <a th:href="@{/usuarios/userList}">Bueltatu zerrendara</a>
 </body>
 </html>

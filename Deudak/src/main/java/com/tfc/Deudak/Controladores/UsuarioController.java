@@ -16,39 +16,10 @@ import com.tfc.Deudak.Repositorios.UserRepository;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/usuarios")
-public class Controller {
+public class UsuarioController {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	// Mostrar formulario de login
-	@GetMapping("/login")
-	public String showLoginForm(Model model) {
-		model.addAttribute("user", new UserModel());
-		return "login";
-	}
-
-	// Procesar login
-	@PostMapping("/login")
-	public String processLogin(@ModelAttribute("user") UserModel user) {
-		System.out.println("Email: " + user.getEmail() + ", Tel: " + user.getPhone());
-
-		return "redirect:/";
-	}
-
-	// Mostrar formulario de registro
-	@GetMapping("/register")
-	public String showRegisterForm(Model model) {
-		model.addAttribute("user", new UserModel());
-		return "register";
-	}
-
-	// Procesar registro
-	@PostMapping("/register")
-	public String processRegister(@ModelAttribute("user") UserModel user) {
-		System.out.println("Registro: " + user.getEmail());
-		return "redirect:/login";
-	}
 
 	// ACCEDER AL INDEX
 	@GetMapping("/")
